@@ -15,14 +15,19 @@
       pre
       {
         font-family: 'Perfect DOS VGA 437';
-        white-space: initial;
+        white-space: nowrap;
         font-size: 0;
+      }
+
+      :root
+      {
+        --font-size: 12pt;
       }
 
       pre > span
       {
         white-space: pre;
-        font-size: 12pt; /* Multiples of 12pt look best */
+        font-size: var(--font-size);
         letter-spacing: calc(-1em / 16); /* convert 9x16 to 8x16 */
       }
 
@@ -60,9 +65,27 @@
       .bE { background: #FF5555; }
       .bF { background: #FFFFFF; }
     </style>
+    <script type="text/javascript">
+      window.onload =
+        function()
+        {
+          const rFontSize = document.getElementById("rFontSize");
+
+          function UpdateFontSize()
+          {
+            document.documentElement.style.setProperty("--font-size", rFontSize.value + "pt");
+          }
+
+          rFontSize.addEventListener("input", UpdateFontSize);
+        };
+    </script>
   </head>
 
   <body>
+    <div>
+      <label for="rFontSize">Font Size</label>
+      <input type="range" id="rFontSize" min="4" max="50" value="12" input="UpdateFontSize()" />
+    </div>
 <!--                12345678901234567890123456789012345678901234567890123456789012345678901234567890 -->
     <pre><span class="f0 b7">  File  Edit  View  Search  Run  Debug  Options                           Help  </span></pre>
     <pre><span class="f7 b1">ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ</span>
